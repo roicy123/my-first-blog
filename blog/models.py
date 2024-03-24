@@ -18,6 +18,7 @@ class Post(models.Model):
         return self.title
     
 
+
 class Comment(models.Model):
     post = models.ForeignKey('blog.Post', on_delete=models.CASCADE, related_name='comments')
     author = models.CharField(max_length=200)
