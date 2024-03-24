@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -24,7 +24,7 @@ class Comment(models.Model):
     text = models.TextField()
     created_date = models.DateTimeField(default=timezone.now)
     approved_comment = models.BooleanField(default=False)
-
+    rating = models.IntegerField(choices=[(i, i) for i in range(1, 6)])
     def approve(self):
         self.approved_comment = True
         self.save()
